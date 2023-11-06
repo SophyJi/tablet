@@ -22,7 +22,7 @@
         <H1> Recipes </H1>
         <div>
             <h2>Shrimp Scampi</h2>
-            <img src="images/shrimp_scampi.jpg"  width="400" alt =" the picture of shrimp scampi "  onclick="openLightbox(this)">
+            <img src="images/shrimp_scampi.jpg" class= 'lb'  width="400" alt =" the picture of shrimp scampi "  onclick="openLightbox(this)">
             <p>Origin: Italian city of Genoa</p>
             <p>Source: Own Recipe</p>
             <p>Category: Main Dish</p>
@@ -53,16 +53,16 @@
                 <li>Stir in the parsley and lemon juice and serve over pasta or accompanied by crusty bread.</li>
             </ol>
             <div class="pg">
-                <img src="images/pasta_cooking.jpg" alt ="Pasta being lifted by a fork in a pot of boiling water. It is almost finished cooking." width = "200"  onclick="openLightbox(this)">
-                <img src="images/shrimp_scampi_cooking.jpg" alt ="Shrimp cooking in a sauce of butter and wine. It is being stirred with a spoon."  width = "200"  onclick="openLightbox(this)">
-                <img src="images/shrimp_cooking.jpg" alt ="Shrimp is cooking until it is pink. Shrimp is almost finished cooking."   width = "200"  onclick="openLightbox(this)">
+                <img src="images/pasta_cooking.jpg" class= 'lb' alt ="Pasta being lifted by a fork in a pot of boiling water. It is almost finished cooking." width = "200"  onclick="openLightbox(this)">
+                <img src="images/shrimp_scampi_cooking.jpg"class= 'lb'  alt ="Shrimp cooking in a sauce of butter and wine. It is being stirred with a spoon."  width = "200"  onclick="openLightbox(this)">
+                <img src="images/shrimp_cooking.jpg" class= 'lb' alt ="Shrimp is cooking until it is pink. Shrimp is almost finished cooking."   width = "200"  onclick="openLightbox(this)">
             </div>
         </div>
 
 
         <div>
             <h2>Matcha Cookies</h2>
-            <img src="images/Matcha-Cookies.jpeg" width="400" alt="many delicious matcha cookies"  onclick="openLightbox(this)">
+            <img src="images/Matcha-Cookies.jpeg" class= 'lb' width="400" alt="many delicious matcha cookies"  onclick="openLightbox(this)">
             <p>Origin: Japanese</p>
             <p>Source: https://www.justonecookbook.com/green-tea-white-chocolate-cookies/</p>
             <p>Category: Dessert</p>
@@ -99,16 +99,16 @@
             </ol>
             <h3>Additional Food images</h3>
             <div class="pg">
-            <img src="images/Cookies-on-tray.jpeg" width="200" alt="Close up of matcha cookies on baking tray"  onclick="openLightbox(this)">
-            <img src="images/Matcha-and-flour.jpeg" width="200" alt="Matcha and flour sifted into a bowl"  onclick="openLightbox(this)">
-            <img src="images/cookie-dough.jpeg" width="200" alt="Raw matcha cookie dough shaped into a cylinder"  onclick="openLightbox(this)">
+            <img src="images/Cookies-on-tray.jpeg" class= 'lb' width="200" alt="Close up of matcha cookies on baking tray"  onclick="openLightbox(this)">
+            <img src="images/Matcha-and-flour.jpeg" class= 'lb' width="200" alt="Matcha and flour sifted into a bowl"  onclick="openLightbox(this)">
+            <img src="images/cookie-dough.jpeg"class= 'lb'  width="200" alt="Raw matcha cookie dough shaped into a cylinder"  onclick="openLightbox(this)">
             </div>
             <!-- Emily Ma -->
     
         </div>
         <div>
             <h2>Scrambled eggs with tomatoes</h2>
-            <img src="images/tomato-egg-main-image.jpeg" width="400" alt="the images of scramble-eggs with tomatos"  onclick="openLightbox(this)">
+            <img src="images/tomato-egg-main-image.jpeg" class= 'lb' width="400" alt="the images of scramble-eggs with tomatos"  onclick="openLightbox(this)">
             <p>Origin: Chinese</p>
             <p>Source: Own Recipe</p>
             <p>Category: Main Dish</p>
@@ -133,19 +133,24 @@
             </ol>
             <h3>Additional Food images</h3>
             <div class="pg">
-            <img src="images/tomato-egg-side1.jpeg" width="200" alt="the Scrambled eggs with tomatoes with rice"  onclick="openLightbox(this)">
-            <img src="images/tomatoes-cooking.webp" width="200" alt="Just tomatoes cooking on a pan"  onclick="openLightbox(this)">
-            <img src="images/scramble-eggs.jpeg" width="200" alt="Scrambled eggs cooking with oil seperately"  onclick="openLightbox(this)"> 
+            <img src="images/tomato-egg-side1.jpeg" class= 'lb' width="200" alt="the Scrambled eggs with tomatoes with rice"  onclick="openLightbox(this)">
+            <img src="images/tomatoes-cooking.webp" class= 'lb' width="200" alt="Just tomatoes cooking on a pan"  onclick="openLightbox(this)">
+            <img src="images/scramble-eggs.jpeg" class= 'lb' width="200" alt="Scrambled eggs cooking with oil seperately"  onclick="openLightbox(this)"> 
             </div>
 
-            <!-- Lightbox Modal -->
             <div id="lightboxModal" class="lightbox">
                 <span class="close" onclick="closeLightbox()">&times;</span>
+                <span class="arrow left" onclick="previousImage()">&#10094;</span> <!-- Left arrow -->
                 <img class="lightbox-content" id="lightboxImage">
+                <span class="arrow right" onclick="nextImage()">&#10095;</span> <!-- Right arrow -->
                 <div id="caption"></div>
             </div>
 
-            <script type="text/javascript">
+            <script type="text/javascript">  
+                // Correct the selector to target elements with class 'lb'
+                var images = document.querySelectorAll('.lb');
+                var currentIndex = 0; 
+            
                 // Function to open the lightbox
                 function openLightbox(imgElement) {
                     var src = imgElement.getAttribute('src'); // Get the source of the image
@@ -153,17 +158,51 @@
                     document.getElementById('lightboxModal').style.display = 'block';
                     document.getElementById('lightboxImage').setAttribute('src', src);
                     document.getElementById('caption').innerText = alt;
+            
+                    // Add the animation class if the window width is greater than or equal to 710px
+                    if (window.innerWidth >= 710) {
+                        document.getElementById('lightboxImage').classList.add('lightbox-zoom-animation');
+                    }
+            
+                    // Update currentIndex to the index of the clicked image
+                    currentIndex = Array.from(images).indexOf(imgElement);
                 }
-
-
+            
                 // Function to close the lightbox
                 function closeLightbox() {
                     document.getElementById('lightboxModal').style.display = 'none';
+                    document.getElementById('lightboxImage').classList.remove('lightbox-zoom-animation');
                 }
+            
+                function nextImage() {
+                    if (currentIndex < images.length - 1) {
+                        currentIndex++;
+                    } else {
+                        currentIndex = 0; // Loop back to the first image
+                    }
+                    openLightbox(images[currentIndex]);
+                }
+            
+                function previousImage() {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                    } else {
+                        currentIndex = images.length - 1; // Loop back to the last image
+                    }
+                    openLightbox(images[currentIndex]);
+                }
+            
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'ArrowRight') {
+                        nextImage();
+                    } else if (e.key === 'ArrowLeft') {
+                        previousImage();
+                    }
+                });
             </script>
         </div>
-        <div></div>
-        <div></div>
     </main>
+
 </body>
+
 </html>
