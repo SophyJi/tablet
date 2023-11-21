@@ -40,12 +40,20 @@ h2 {
     margin: 20px 0;
     animation: flash 2s infinite;
 }
+.gif {
+    display: block;
+}
 
-
+.static {
+    display: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
-    h2 {
-        animation: none;
+    .gif {
+       display: none;
+    }
+    .static{
+        display: block;
     }
 }
 
@@ -144,6 +152,12 @@ li:hover {
     background-color: grey; 
     color: #f4f4f4; 
 }
+.pgpets {
+    display: grid;
+    grid-template-columns: repeat(4, 2fr);
+    gap: 20px;
+    justify-items: center;
+}
 
 .pg {
     display: grid;
@@ -164,6 +178,12 @@ li:hover {
     .navigation a {
         font-size: 15px;
         padding: 15px 25px;
+    }
+    .pgpets {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        justify-items: center;
     }
     .pg {
         grid-template-columns: repeat(2, 1fr); 
