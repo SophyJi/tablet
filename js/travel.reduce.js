@@ -1,4 +1,4 @@
-const images = document.querySelectorAll('.gif');
+const image = document.querySelectorAll('.gif');
 const imagess = document.querySelectorAll('.static');
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -7,7 +7,7 @@ const imagess = document.querySelectorAll('.static');
             image.src = 'images/qinhuai.JPG';
         });
     } else {
-        images.forEach(image => {
+        image.forEach(image => {
             // Set to GIF
             image.src = 'images/nanjing.gif';
         });
